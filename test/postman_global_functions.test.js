@@ -1,7 +1,4 @@
-//process.env['NODE_DEV'] = 'TEST';
 const postman_global_functions = require('../src/postman_global_functions');
-
-
 
 describe("Is Active", () => {
 
@@ -19,17 +16,26 @@ describe("Is Active", () => {
 describe("Check checkGlobalsVarsSet", () => {
 
 
-    test("Verify checkGlobalsVarsSet with null", () => {
+    test("Verify checkGlobalsVarsSet with null", async () => {
         // arrange and act
-        var result = globals.checkGlobalsVarsSet();
+
+        // assert
+        expect(() => globals.checkGlobalsVarsSet()).toThrowError(
+            Error('variable_list is undefined')
+        )
+    })
+
+    test("Verify checkGlobalsVarsSet with empty list", () => {
+        // arrange and act
+        var result = globals.checkGlobalsVarsSet([]);
 
         // assert
         expect(result).toBe(true);
     });
 
-    test("Verify checkGlobalsVarsSet with empty list", () => {
+    test("Verify checkGlobalsVarsSet with one element", () => {
         // arrange and act
-        var result = globals.checkGlobalsVarsSet([]);
+        var result = globals.checkGlobalsVarsSet(["example"]);
 
         // assert
         expect(result).toBe(true);

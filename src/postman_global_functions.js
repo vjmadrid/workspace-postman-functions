@@ -1,17 +1,18 @@
-//const process = require('process');
-
 globals = {
 
     isActive: function(){
         return true
     },
 
-    checkGlobalsVarsSet: function(variables){
+    checkGlobalsVarsSet: function(variable_list){
         result = true
-        variables.forEach(variable => {
+        if(typeof(variable_list) === "undefined"){
+            throw new Error("variable_list is undefined");
+        }
+        variable_list.forEach(variable => {
             const varValue = pm.globals.get(variable);
             if(typeof(varValue) === "undefined"){
-                throw new Error(`Please, go to "Environments -> Globals" and set: ${variables.join(', ')}`);
+                throw new Error(`Please, go to "Environments -> Globals" and set: ${variable_list.join(', ')}`);
             }
         })
 
@@ -19,7 +20,3 @@ globals = {
     }
 
 }
-
-//if (process.env['NODE_DEV'] == 'TEST') {
-//    module.exports = globals
-//}

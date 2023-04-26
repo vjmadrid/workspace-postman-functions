@@ -1,5 +1,9 @@
 globals = {
 
+    isActive: function(){
+        return true
+    },
+
     checkGlobalsVarsSet: function(variables){
         variables.forEach(variable => {
             const varValue = pm.globals.get(variable);

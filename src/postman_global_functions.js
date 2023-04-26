@@ -14,3 +14,5 @@ globals = {
     }
 
 }
+
+module.exports = globals

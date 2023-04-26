@@ -13,3 +13,16 @@ describe("Is Active", () => {
     });
 
 })
+
+describe("Check checkGlobalsVarsSet", () => {
+
+
+    test("Verify checkGlobalsVarsSet with empty list", () => {
+        // arrange and act
+        var result = globals.checkGlobalsVarsSet([]);
+
+        // assert
+        expect(result).toBe(true);
+    });
+
+})

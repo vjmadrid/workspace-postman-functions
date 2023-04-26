@@ -1,3 +1,4 @@
+process.env['NODE_DEV'] = 'TEST';
 const globals = require('../src/postman_global_functions');
 
 

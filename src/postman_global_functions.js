@@ -18,6 +18,6 @@ globals = {
 
 }
 
-if (module && module.exports) {
+if (process.env['NODE_DEV'] == 'TEST') {
     module.exports = globals
 }

@@ -1,5 +1,7 @@
 const globals = require('../src/postman_global_functions');
 
+
+
 describe("Is Active", () => {
 
     test("Verify is active", () => {

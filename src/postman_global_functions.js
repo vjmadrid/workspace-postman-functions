@@ -15,6 +15,6 @@ globals = {
 
 }
 
-if (module) {
+if (module && module.exports) {
     module.exports = globals
 }

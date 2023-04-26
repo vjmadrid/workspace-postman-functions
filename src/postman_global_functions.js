@@ -1,4 +1,4 @@
-const process = require('process');
+//const process = require('process');
 
 globals = {
 
@@ -20,6 +20,6 @@ globals = {
 
 }
 
-if (process.env['NODE_DEV'] == 'TEST') {
-    module.exports = globals
-}
+//if (process.env['NODE_DEV'] == 'TEST') {
+//    module.exports = globals
+//}

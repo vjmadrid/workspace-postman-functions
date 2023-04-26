@@ -21,5 +21,8 @@
     "coverageReporters": [
       "html"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-rewire": "^1.2.0"
   }
 }

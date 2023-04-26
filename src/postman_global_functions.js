@@ -15,4 +15,4 @@ globals = {
 
 }
 
-module.exports = globals
+//module.exports = globals

@@ -1,9 +1,10 @@
 const postman_global_functions = require('../src/postman_global_functions');
 
-describe("Check isActive method", () => {
+describe("Is Active", () => {
 
-    test("Verify return true", () => {
+    test("Verify is active", () => {
         // arrange and act
+        //globals = postman_global_functions.__get__('globals')
         var result = globals.isActive();
 
         // assert
@@ -11,28 +12,6 @@ describe("Check isActive method", () => {
     });
 
 })
-
-describe("Check isParameterUndefined method", () => {
-
-    test("Verify isParameterUndefined with parameter undefined", async () => {
-        // arrange and act
-
-        // assert
-        expect(() => globals.isParameterUndefined(undefined, 'user_name')).toThrowError(
-            Error('user_name is undefined')
-        )
-    })
-
-    test("Verify isParameterUndefined", () => {
-        // arrange and act
-        var result = globals.isParameterUndefined('test', 'user_name');
-
-        // assert
-        expect(result).toBe(true);
-    })
-
-})
-
 
 describe("Check checkGlobalsVarsSet", () => {
 

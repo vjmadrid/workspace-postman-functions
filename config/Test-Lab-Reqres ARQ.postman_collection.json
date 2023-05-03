@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "db2d26a8-3498-47e5-88fa-0a678b683b50",
+		"name": "Test-Lab-Reqres ARQ",
+		"description": "## Sample API collection\n\nExample requests from this\n\n* Register a user\n* Login a user with given credentials\n* Get details for a user",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "page",
+					"item": [
+						{
+							"name": "Get all users with pagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://reqres.in/api/users?per_page=20",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "per_page",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all users with access page",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://reqres.in/api/users?page=2",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get user by id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://reqres.in/api/users/2",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "register",
+					"item": [
+						{
+							"name": "Register user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Should return status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Should return a token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    ",
+											"    pm.expect(jsonData.token).to.exist",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"pistol\"\n}"
+								},
+								"url": {
+									"raw": "https://reqres.in/api/register",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"cityslicka\"\n}"
+								},
+								"url": {
+									"raw": "https://reqres.in/api/login",
+									"protocol": "https",
+									"host": [
+										"reqres",
+										"in"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new user with static values",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"superadmin@acme.com\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user with static values",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"superadmin@acme\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users/:id",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/:id",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "config",
+			"item": [
+				{
+					"name": "postman-global-functions",
+					"item": [
+						{
+							"name": "01 Prepare postman-global-functions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman.setGlobalVariable('postman_global_functions', responseBody);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://raw.githubusercontent.com/vjmadrid/workspace-postman-functions/main/src/postman_global_functions.js",
+									"protocol": "https",
+									"host": [
+										"raw",
+										"githubusercontent",
+										"com"
+									],
+									"path": [
+										"vjmadrid",
+										"workspace-postman-functions",
+										"main",
+										"src",
+										"postman_global_functions.js"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02 Verify postman-global-functions active",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"postman_global_functions = eval(globals.postman_global_functions);",
+											"",
+											"console.log(postman_global_functions)",
+											"",
+											"pm.test(\"Verify postman_global_functions is Active\", function () {",
+											"    pm.expect(postman_global_functions.isActive()).to.be.equal(true);",
+											"})",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://postman-echo.com/time/now",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"time",
+										"now"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Check Configuration",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const URL = require('url');",
+									"",
+									"// Check if 'postman_global_functions_url' is set",
+									"const cdn_js = pm.globals.get('postman_global_functions_url');",
+									"",
+									"function isValidHttpUrl(string) {",
+									"  let url;",
+									"  try { url = URL.parse(string); } catch (err) { console.log(\"Error: \", err); return false; }",
+									"  return url.protocol === \"http:\" || url.protocol === \"https:\";",
+									"}",
+									"",
+									"if(!isValidHttpUrl(cdn_js)){",
+									"    throw new Error(`'postman_global_functions_url' does not contain a valid URL (${cdn_js}). Please, review global variables`);",
+									"}",
+									"",
+									"console.log(\"cdn_js ::\" + cdn_js)",
+									"",
+									"// Load global functions from CDN",
+									"pm.sendRequest(cdn_js, (err, res) => {         ",
+									"    if(err){",
+									"        throw new Error(`${err}.`);",
+									"    }else{",
+									"        postman.setGlobalVariable('postman_global_functions', res.text());",
+									"        console.log(\"postman_global_functions is loaded\")",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Verify postman_global_functions is loaded\", function () {",
+									"    postman_global_functions = eval(globals.postman_global_functions);",
+									"",
+									"    pm.expect(postman_global_functions.isActive()).to.be.equal(true);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/time/now",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"time",
+								"now"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "Example",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Load postman_global_functions",
+									"postman_global_functions = eval(globals.postman_global_functions);",
+									"",
+									"// Check",
+									"postman_global_functions.checkGlobalsVarsSet([\"example3\"])"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/time/now",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"time",
+								"now"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_collection_var",
+			"value": "https://reqres.in"
+		},
+		{
+			"key": "user_path_collection_var",
+			"value": "/users"
+		},
+		{
+			"key": "environment_collection_var",
+			"value": "QA"
+		},
+		{
+			"key": "skip_test_collection_var",
+			"value": "true"
+		},
+		{
+			"key": "randomBetween",
+			"value": "(min, max) => { min = Math.ceil(min); max = Math.floor(max); return Math.floor(Math.random() * (max - min)) + min; }"
+		},
+		{
+			"key": "user_id_collection_var",
+			"value": 4
+		},
+		{
+			"key": "user_email_collection_var",
+			"value": "superadmin@acme.com"
+		},
+		{
+			"key": "user_name_collection_var",
+			"value": "Michael"
+		},
+		{
+			"key": "user_job_collection_var",
+			"value": "Lawson"
+		},
+		{
+			"key": "set_id_user_collection_var",
+			"value": 4
+		},
+		{
+			"key": "user_body_data_json_collection_var",
+			"value": "{\"email\":\"superadmin@acme.com\",\"password\":\"123456\"}"
+		},
+		{
+			"key": "user_password_collection_var",
+			"value": "123456"
+		},
+		{
+			"key": "random_email_collection_var",
+			"value": "email_32@acme.com"
+		},
+		{
+			"key": "user_collection_var",
+			"value": {
+				"id": 7,
+				"email": "michael.lawson@reqres.in",
+				"first_name": "Michael",
+				"last_name": "Lawson",
+				"avatar": "https://reqres.in/img/faces/7-image.jpg"
+			}
+		},
+		{
+			"key": "userJSON_collection_var",
+			"value": "{\"id\":7,\"email\":\"michael.lawson@reqres.in\",\"first_name\":\"Michael\",\"last_name\":\"Lawson\",\"avatar\":\"https://reqres.in/img/faces/7-image.jpg\"}"
+		},
+		{
+			"key": "user_schema_collection_var",
+			"value": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "integer"
+							},
+							"email": {
+								"type": "string"
+							},
+							"first_name": {
+								"type": "string"
+							},
+							"last_name": {
+								"type": "string"
+							},
+							"avatar": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"id",
+							"email",
+							"first_name",
+							"last_name",
+							"avatar"
+						]
+					},
+					"support": {
+						"type": "object",
+						"properties": {
+							"url": {
+								"type": "string"
+							},
+							"text": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"url",
+							"text"
+						]
+					}
+				},
+				"required": [
+					"data",
+					"support"
+				]
+			}
+		},
+		{
+			"key": "id_user_collection_var",
+			"value": ""
+		},
+		{
+			"key": "user_JSON_collection_var",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "userjob",
+			"value": ""
+		}
+	]
+}

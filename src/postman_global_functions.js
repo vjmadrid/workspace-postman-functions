@@ -12,8 +12,7 @@ globals = {
         return true
     },
 
-    checkGlobalsVarsSet: function(pm, variable_list){
-        this.isParameterUndefined(pm, 'pm')
+    checkGlobalsVarsSet: function(variable_list){
         this.isParameterUndefined(variable_list, 'variable_list')
 
         variable_list.forEach(variable => {
@@ -53,6 +52,5 @@ globals = {
         }
     },
 
-    
 
 }

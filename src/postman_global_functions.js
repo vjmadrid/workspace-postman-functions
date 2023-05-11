@@ -6,7 +6,7 @@ globals = {
 
     isParameterUndefined: function(parameter, parameter_name){
         if(typeof(parameter) === "undefined"){
-            throw new Error(parameter_name + ' is undefined');
+            throw new Error(parameter_name + " is undefined")
         }
 
         return true
@@ -23,6 +23,6 @@ globals = {
         })
 
         return true
-    }
+    },
 
 }

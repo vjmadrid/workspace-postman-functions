@@ -18,7 +18,7 @@ globals = {
         variable_list.forEach(variable => {
             const value = pm.globals.get(variable);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, go to 'Environments -> Globals' and set: ${variable_list.join(', ')}`)
+                throw new Error("Please, go to 'Environments -> Globals' and set: ${variable_list.join(', ')}")
             }
         })
 

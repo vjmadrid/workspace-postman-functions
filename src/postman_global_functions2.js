@@ -46,4 +46,15 @@ globals = {
         return true
     },
 
+    setCollectionVar: function(name, value) {
+        this.isParameterUndefined(name);
+        this.isParameterUndefined(value);
+        pm.collectionVariables.set(name, value);
+    },
+
+    getCollectionVar: function(name) {
+        this.isParameterUndefined(name);
+        return pm.collectionVariables.get(name);
+    },
+
 }

@@ -1,6 +1,7 @@
 globals = {
 
     isActive: function(){
+        
         return true
     },
 

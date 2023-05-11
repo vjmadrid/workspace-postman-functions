@@ -25,5 +25,4 @@ globals = {
         return true
     }
 
-
 }

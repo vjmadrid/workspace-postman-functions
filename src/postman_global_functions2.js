@@ -57,4 +57,9 @@ globals = {
         return pm.collectionVariables.get(name);
     },
 
+    unsetCollectionVar: function(name) {
+        this.isParameterUndefined(name);
+        return pm.collectionVariables.unset(name);
+    },
+
 }

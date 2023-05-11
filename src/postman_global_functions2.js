@@ -14,7 +14,7 @@ globals = {
     },
 
     /**
-     * Global operations 
+     * Global variables operations 
      */
     checkGlobalsVarsSet: function(variable_list){
         this.isParameterUndefined(variable_list, 'variable_list')
@@ -29,9 +29,25 @@ globals = {
         return true
     },
 
+    setGlobalVar: function(name, value) {
+        this.isParameterUndefined(name);
+        this.isParameterUndefined(value);
+        pm.globals.set(name, value);
+    },
+
+    getGlobalVar: function(name) {
+        this.isParameterUndefined(name);
+        return pm.globals.get(name);
+    },
+
+    unsetGlobalVar: function(name) {
+        this.isParameterUndefined(name);
+        return pm.globals.unset(name);
+    },
+
 
     /**
-     * Collection operations 
+     * Collection variables operations 
      */
     checkCollectionVarsSet: function(variable_list){
         this.isParameterUndefined(variable_list, 'variable_list')

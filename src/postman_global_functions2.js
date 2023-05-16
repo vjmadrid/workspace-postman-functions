@@ -69,7 +69,8 @@ console.log("headers:" + pm.request.headers);
 console.log("-------------------------");
         header_list.forEach(header => {
             console.log("> header: " + header);
-            const value = pm.request.headers.get(header);
+            //const value = pm.request.headers.get(header);
+            const value = pm.request.headers[header];
             console.log("      " + value);
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the header '" + header + "'");

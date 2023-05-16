@@ -95,5 +95,37 @@ globals = {
         return true
     },
 
+    /**
+     * Checking the list of headers for a response
+     * 
+     * VERY IMPORTANT:
+     *   By default, the header name is empty. We must to assign the name with the key if we want to access it
+     */
+    checkResponseHeaders: function(header_list) {
+        this.isParameterUndefined(header_list, 'header_list')
+        const headers = pm.response.headers;
+
+        //Print HeaderList
+        //console.log(headers)
+        // To get count of headers 
+        //console.log("Count of headers in response: "+headers.count())
+        
+        // Iterate one by one. Assign the name of each header with its key (name=key)
+        headers.each((header) => 
+        {
+            console.log("key: " + header.key + ", value: " + header.value + ", name: " + header.name);
+            header.name = header.key; // By default, name is empty
+        });
+
+        header_list.forEach(header => {
+            const value = pm.response.headers.get(header);  // Get value by its header name
+            if(typeof(value) === "undefined"){
+                throw new Error("Header '" + header + "' was not returned");
+            }
+        })
+
+        return true
+    },
+
 
 }

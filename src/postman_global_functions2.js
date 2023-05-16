@@ -29,23 +29,6 @@ globals = {
         return true
     },
 
-    /*
-    setGlobalVar: function(name, value) {
-        this.isParameterUndefined(name);
-        this.isParameterUndefined(value);
-        pm.globals.set(name, value);
-    },
-
-    getGlobalVar: function(name) {
-        this.isParameterUndefined(name);
-        return pm.globals.get(name);
-    },
-
-    unsetGlobalVar: function(name) {
-        this.isParameterUndefined(name);
-        return pm.globals.unset(name);
-    },
-    */
 
     /**
      * Environment variables operations 
@@ -56,7 +39,7 @@ globals = {
         variable_list.forEach(variable => {
             const value = pm.environment.get(variable);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, go to 'Enviroments (left panel) -> select enviroment' and set: ${variable_list.join(', ')}")
+                throw new Error("Please, go to 'Enviroments (left panel) -> select enviroment' and set the variable '" + value + "'");
             }
         })
 
@@ -72,55 +55,24 @@ globals = {
         variable_list.forEach(variable => {
             const value = pm.collectionVariables.get(variable);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, go to 'Collections (left panel) -> select collection -> Select Variables tab' and set: ${variable_list.join(', ')}")
+                throw new Error("Please, go to 'Collections (left panel) -> select collection -> Select Variables tab' and set the variable '" + value + "'");
             }
         })
 
         return true
     },
 
-    /*
-    // Set the value for a collection variable 
-    setCollectionVar: function(name, value) {
-        this.isParameterUndefined(name);
-        this.isParameterUndefined(value);
-        pm.collectionVariables.set(name, value);
-    },
-
-    // Get the value from a collection variable
-    getCollectionVar: function(name) {
-        this.isParameterUndefined(name);
-        return pm.collectionVariables.get(name);
-    },
-
-    // Unset one collection variable
-    unsetCollectionVar: function(name) {
-        this.isParameterUndefined(name);
-        return pm.collectionVariables.unset(name);
-    },
-
-    // Unset multiple collection variables
-    unsetCollectionVars: function(variable_list) {
-        this.isParameterUndefined(variable_list, 'variable_list')
-
-        variable_list.forEach(variable => {
-            const value = pm.collectionVariables.get(variable);
-            if(typeof(value) === "undefined"){
-                console.error("Error unsetting variables. Variable " + variable + " undefined");
-            } else {
-                console.info("Unsetting variable " + variable + ": Done");
-            }
-        })
-    },
-    */
-
     checkRequestHeaders: function(header_list) {
         this.isParameterUndefined(header_list, 'header_list')
-
+console.log("header_list: " + header_list);
+console.log("headers:" + pm.request.headers);
+console.log("-------------------------");
         header_list.forEach(header => {
+            console.log("> header: " + header);
             const value = pm.request.headers.get(header);
+            console.log("      " + value);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the header '" + value + "'");
+                throw new Error("Please, set the header '" + header + "'");
             }
         })
 

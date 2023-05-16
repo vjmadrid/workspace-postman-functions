@@ -1,4 +1,4 @@
-const postman_global_functions = require('../src/postman_global_functions');
+const postman_global_functions = require('../src/postman_global_functions2');
 
 describe("Check isActive method", () => {
 

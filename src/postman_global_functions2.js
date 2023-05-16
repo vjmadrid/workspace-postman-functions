@@ -78,4 +78,17 @@ globals = {
         return pm.collectionVariables.unset(name);
     },
 
+    unsetCollectionVars: function(variable_list) {
+        this.isParameterUndefined(variable_list, 'variable_list')
+
+        variable_list.forEach(variable => {
+            const value = pm.collectionVariables.get(variable);
+            if(typeof(value) === "undefined"){
+                console.error("Error unsetting variables. Variable " + variable + " undefined");
+            } else {
+                console.info("Unsetting variable " + variable + ": Done");
+            }
+        })
+    },
+
 }

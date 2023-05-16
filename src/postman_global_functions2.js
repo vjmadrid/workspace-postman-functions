@@ -77,6 +77,17 @@ console.log("header_list: " + header_list);
 console.log("headers:" + headers);
 console.log("-------------------------");
 
+ //Print HeaderList
+console.log(headers)
+ // To get count of headers 
+console.log("Count of headers in request: "+headers.count())
+ // Iterate and print one by one
+headers.each((header) => 
+{
+    console.log(header.key)
+    console.log(header.value)
+    console.log(header.name)
+});
         header_list.forEach(header => {
             console.log("> header: " + header);
             //const value = pm.request.headers.get(header);

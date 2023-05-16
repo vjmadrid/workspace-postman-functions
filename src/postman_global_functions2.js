@@ -66,36 +66,29 @@ globals = {
      * Checking the list of headers for a request
      * 
      * VERY IMPORTANT:
-     *   Default Postman headers are not seen in pre-request script
-     *   Headers must be defined implicitly 
+     *   Default Postman headers are not seen in pre-request script. Headers must be defined explicitly
+     *   By default, the header name is empty. We must to assign the name with the key if we want to access it
      */
     checkRequestHeaders: function(header_list) {
         this.isParameterUndefined(header_list, 'header_list')
         const headers = pm.request.headers;
-        if (headers.count() == 0) return false;
-console.log("header_list: " + header_list);
-console.log("headers:" + headers);
-console.log("-------------------------");
 
- //Print HeaderList
-console.log(headers)
- // To get count of headers 
-console.log("Count of headers in request: "+headers.count())
- // Iterate and print one by one
-headers.each((header) => 
-{
-    console.log("key: " + header.key);
-    console.log("value: " + header.value);
-    console.log("name: " + header.name);
-    header.name = header.key;
-});
+        //Print HeaderList
+        //console.log(headers)
+        // To get count of headers 
+        //console.log("Count of headers in request: "+headers.count())
+        
+        // Iterate one by one. Assign the name of each header with its key (name=key)
+        headers.each((header) => 
+        {
+            //console.log("key: " + header.key + ", value: " + header.value + ", name: " + header.name);
+            header.name = header.key; // By default, name is empty
+        });
+
         header_list.forEach(header => {
-            console.log("> header: " + header);
-            const value = pm.request.headers.get(header);
-            //const value = pm.request.headers[header];
-            console.log("      " + value);
+            const value = pm.request.headers.get(header);  // Get value by its header name
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the header '" + header + "'");
+                throw new Error("Please, set the header '" + header + "' explicitly");
             }
         })
 

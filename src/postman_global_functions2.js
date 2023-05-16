@@ -64,9 +64,14 @@ globals = {
 
     checkRequestHeaders: function(header_list) {
         this.isParameterUndefined(header_list, 'header_list')
+        const headers = pm.request.headers;
 console.log("header_list: " + header_list);
-console.log("headers:" + pm.request.headers);
+console.log("headers:" + headers.count());
 console.log("-------------------------");
+        headers.forEach(h => {
+            console.log(h.key + " = " + h.value + "(" + h.name + ")");
+        });
+
         header_list.forEach(header => {
             console.log("> header: " + header);
             //const value = pm.request.headers.get(header);

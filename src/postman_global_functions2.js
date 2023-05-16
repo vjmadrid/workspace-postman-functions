@@ -56,7 +56,7 @@ globals = {
         variable_list.forEach(variable => {
             const value = pm.environment.get(variable);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, go to 'Collections (left panel) -> select collection -> Select Variables tab' and set: ${variable_list.join(', ')}")
+                throw new Error("Please, go to 'Enviroments (left panel) -> select enviroment' and set: ${variable_list.join(', ')}")
             }
         })
 
@@ -113,6 +113,19 @@ globals = {
         })
     },
     */
+
+    checkRequestHeaders: function(header_list) {
+        this.isParameterUndefined(header_list, 'header_list')
+
+        header_list.forEach(header => {
+            const value = pm.request.headers.get(header);
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, set the header '" + value + "'");
+            }
+        })
+
+        return true
+    },
 
 
 }

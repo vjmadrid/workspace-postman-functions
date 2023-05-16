@@ -84,14 +84,15 @@ console.log("Count of headers in request: "+headers.count())
  // Iterate and print one by one
 headers.each((header) => 
 {
-    console.log(header.key)
-    console.log(header.value)
-    console.log(header.name)
+    console.log("key: " + header.key);
+    console.log("value: " + header.value);
+    console.log("name: " + header.name);
+    header.name = header.key;
 });
         header_list.forEach(header => {
             console.log("> header: " + header);
-            //const value = pm.request.headers.get(header);
-            const value = pm.request.headers[header];
+            const value = pm.request.headers.get(header);
+            //const value = pm.request.headers[header];
             console.log("      " + value);
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the header '" + header + "'");

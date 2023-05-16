@@ -62,15 +62,20 @@ globals = {
         return true
     },
 
+    /**
+     * Checking the list of headers for a request
+     * 
+     * VERY IMPORTANT:
+     *   Default Postman headers are not seen in pre-request script
+     *   Headers must be defined implicitly 
+     */
     checkRequestHeaders: function(header_list) {
         this.isParameterUndefined(header_list, 'header_list')
         const headers = pm.request.headers;
+        if (headers.count() == 0) return false;
 console.log("header_list: " + header_list);
-console.log("headers:" + headers.count());
+console.log("headers:" + headers);
 console.log("-------------------------");
-        headers.forEach(h => {
-            console.log(h.key + " = " + h.value + "(" + h.name + ")");
-        });
 
         header_list.forEach(header => {
             console.log("> header: " + header);

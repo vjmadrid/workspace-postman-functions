@@ -174,8 +174,8 @@ globals = {
             throw new Error("Body is empty. Please, define a body in JSON format");
         }
 
-        const jsonData = pm.request.body.toJSON();
-console.log("JSON: " + JSON.parse(jsonData));
+        const jsonData = JSON.parse(pm.request.body.toJSON());
+console.log("JSON: " + jsonData);
         key_list.forEach(key => {
             value = jsonData[key];
             console.log("* " + key + ": " + value);

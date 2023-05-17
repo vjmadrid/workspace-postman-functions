@@ -203,16 +203,10 @@ globals = {
 
         const jsonData = pm.response.json();
 console.log("jsonData: " + jsonData);
-console.log("typeof: " + JSON.stringify(jsonData));
-        if (typeof(jsonData.data) === undefined) {
-            throw new Error("No data was returned from the end-point");            
-        }
+console.log("typeof: " + typeof(jsonData));
 
-        ourBody = JSON.parse(jsonData.data);
-console.log("ourBody: " + ourBody);
-console.log("typeof: " + JSON.stringify(ourBody));
         key_list.forEach(key => {
-            value = ourBody[key];
+            value = jsonData[key];
             if(typeof(value) === "undefined"){
                 throw new Error("The key '" + key + "' is not present in the JSON data in the response");
             }

@@ -127,5 +127,20 @@ globals = {
         return true
     },
 
+    /**
+     * Checking a list of parameters in the path of request
+     */
+    checkRequestPathParams: function(param_list) {
+        this.isParameterUndefined(param_list, 'param_list')
+
+        param_list.forEach(param => {
+            const value = pm.request.url.query.get(param); 
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, set the param '" + param + "' explicitly in the url path");
+            }
+        })
+
+        return true
+    },
 
 }

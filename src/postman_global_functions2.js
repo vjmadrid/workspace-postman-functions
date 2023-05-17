@@ -166,6 +166,7 @@ globals = {
 
     /**
      * Checking a list of keys in the Body (Json format)
+     * IMPORTANT: Internally, postman adds the keys 'mode' and 'raw'. Our JSON is children of 'raw'
      */
     checkRequestBodyJson: function(key_list) {
         this.isParameterUndefined(key_list, 'key_list')
@@ -177,12 +178,12 @@ globals = {
         const jsonData = pm.request.body.toJSON();
 console.log("JSON: " + jsonData);
 console.log("typeof: " + typeof(jsonData));
-console.log("typeof: " + JSON.stringify(jsonData));
+console.log("jsonData: " + JSON.stringify(jsonData));
 for (var key in jsonData) {
     console.log(">>>" + key);
 }
         key_list.forEach(key => {
-            value = jsonData[key];
+            value = jsonData.raw[key];
             console.log("* " + key + ": " + value);
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request");

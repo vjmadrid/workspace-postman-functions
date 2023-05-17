@@ -157,7 +157,29 @@ globals = {
         variable_list.forEach(variable => {
             const value = pm.request.url.variables.get(variable);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path");
+                throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path and assign it a value");
+            }
+        })
+
+        return true
+    },
+
+    /**
+     * Checking a list of keys in the Body (Json format)
+     */
+    checkRequestBodyJson: function(key_list) {
+        this.isParameterUndefined(key_list, 'key_list')
+
+        if (pm.request.body.isEmpty()) {
+            throw new Error("Body is empty. Please, define a body in JSON format");
+        }
+
+        const jsonData = pm.request.body.toJSON();
+console.log("JSON: " + JSON.stringify(jsonData))
+        key_list.forEach(key => {
+            console.log("* " + key + ": " + jsonData[key]);
+            if(jsonData[key] === "undefined"){
+                throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path and assign it a value");
             }
         })
 

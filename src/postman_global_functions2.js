@@ -202,13 +202,15 @@ globals = {
         this.isParameterUndefined(key_list, 'key_list')
 
         const jsonData = pm.response.json();
-
+console.log("jsonData: " + jsonData);
+console.log("typeof: " + JSON.stringify(jsonData));
         if (typeof(jsonData.data) === undefined) {
             throw new Error("No data was returned from the end-point");            
         }
 
         ourBody = JSON.parse(jsonData.data);
-
+console.log("ourBody: " + ourBody);
+console.log("typeof: " + JSON.stringify(ourBody));
         key_list.forEach(key => {
             value = ourBody[key];
             if(typeof(value) === "undefined"){

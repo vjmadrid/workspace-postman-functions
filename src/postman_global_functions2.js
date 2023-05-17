@@ -177,6 +177,10 @@ globals = {
         const jsonData = pm.request.body.toJSON();
 console.log("JSON: " + jsonData);
 console.log("typeof: " + typeof(jsonData));
+console.log("typeof: " + JSON.stringify(jsonData));
+for (var key in jsonData) {
+    console.log(">>>" + key);
+}
         key_list.forEach(key => {
             value = jsonData[key];
             console.log("* " + key + ": " + value);

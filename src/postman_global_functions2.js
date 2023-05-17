@@ -177,9 +177,10 @@ globals = {
         const jsonData = pm.request.body.toJSON();
 console.log("JSON: " + JSON.stringify(jsonData))
         key_list.forEach(key => {
-            console.log("* " + key + ": " + jsonData[key]);
-            if(jsonData[key] === "undefined"){
-                throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path and assign it a value");
+            value = jsonData[key];
+            console.log("* " + key + ": " + value);
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, set the key ':" + key + "' explicitly in the JSON data in the body request");
             }
         })
 

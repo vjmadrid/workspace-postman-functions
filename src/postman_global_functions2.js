@@ -147,15 +147,15 @@ globals = {
     /**
      * Checking a list of path variables in the path of request
      * Example: http://www.mysite.com/:var
+     * 
+     * IMPORTANT: In the testing, don't use ":" before the name of variable
+     *    postman_global_functions.checkRequestPathVars(["id"]);
      */
     checkRequestPathVars: function(variable_list) {
         this.isParameterUndefined(variable_list, 'variable_list')
 
-        console.log(pm.request.url.variables.all());
         variable_list.forEach(variable => {
-            console.log("variable: " + variable); 
             const value = pm.request.url.variables.get(variable);
-            console.log("value: " + value); 
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path");
             }

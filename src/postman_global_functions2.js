@@ -182,11 +182,15 @@ console.log("jsonData: " + JSON.stringify(jsonData));
 for (var key in jsonData) {
     console.log(">>>" + key);
 }
+console.log("raw: " + JSON.stringify(jsonData.raw));
+for (var key in jsonData.raw) {
+    console.log("---" + key);
+}
         key_list.forEach(key => {
             value = jsonData.raw[key];
             console.log("* " + key + ": " + value);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request");
+                throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request. Remember specify a 'raw' body and JSON format");
             }
         })
 

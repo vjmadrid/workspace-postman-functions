@@ -166,7 +166,9 @@ globals = {
 
     /**
      * Checking a list of keys in the Body (Json format)
-     * IMPORTANT: Internally, postman adds the keys 'mode' and 'raw'. Our JSON is children of 'raw'
+     * IMPORTANT: 
+     *    - Internally, postman adds the keys 'mode' and 'raw'. Our JSON is children of 'raw'
+     *    - 'raw' key stores our JSON body as string. You must parse it to JSON Object
      */
     checkRequestBodyJson: function(key_list) {
         this.isParameterUndefined(key_list, 'key_list')
@@ -176,6 +178,11 @@ globals = {
         }
 
         const jsonData = pm.request.body.toJSON();
+
+        if (typeof(jsonData.raw) === undefined) {
+            throw new Error("Please, define your JSON data in the body request. Remember specify a 'raw' body and JSON format");            
+        }
+
 console.log("JSON: " + jsonData);
 console.log("typeof: " + typeof(jsonData));
 console.log("jsonData: " + JSON.stringify(jsonData));
@@ -186,11 +193,13 @@ console.log("raw: " + JSON.stringify(jsonData.raw));
 for (var key in jsonData.raw) {
     console.log("---" + key);
 }
+        ourBody = JSON.parse(jsonData.raw);
+
         key_list.forEach(key => {
-            value = jsonData.raw[key];
+            value = ourBody[key];
             console.log("* " + key + ": " + value);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request. Remember specify a 'raw' body and JSON format");
+                throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request");
             }
         })
 

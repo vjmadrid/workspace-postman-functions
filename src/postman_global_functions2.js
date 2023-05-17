@@ -200,10 +200,7 @@ globals = {
      */
     checkResponseJson: function(key_list) {
         this.isParameterUndefined(key_list, 'key_list')
-
         const jsonData = pm.response.json();
-console.log("jsonData: " + jsonData);
-console.log("typeof: " + typeof(jsonData));
 
         key_list.forEach(key => {
             value = jsonData[key];

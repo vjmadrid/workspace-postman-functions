@@ -195,4 +195,28 @@ globals = {
         return true
     },
 
+    /**
+     * Checking a list of keys in the Body (Json format)
+     */
+    checkResponseJson: function(key_list) {
+        this.isParameterUndefined(key_list, 'key_list')
+
+        const jsonData = pm.response.json();
+
+        if (typeof(jsonData.data) === undefined) {
+            throw new Error("No data was returned from the end-point");            
+        }
+
+        ourBody = JSON.parse(jsonData.data);
+
+        key_list.forEach(key => {
+            value = ourBody[key];
+            if(typeof(value) === "undefined"){
+                throw new Error("The key '" + key + "' is not present in the JSON data in the response");
+            }
+        })
+
+        return true
+    },
+
 }

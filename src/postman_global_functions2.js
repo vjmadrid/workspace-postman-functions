@@ -151,8 +151,11 @@ globals = {
     checkRequestPathVars: function(variable_list) {
         this.isParameterUndefined(variable_list, 'variable_list')
 
+        console.log(pm.request.url.variables.all());
         variable_list.forEach(variable => {
-            const value = pm.request.url.variables.get(variable); 
+            console.log("variable: " + variable); 
+            const value = pm.request.url.variables.get(variable);
+            console.log("value: " + value); 
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path");
             }

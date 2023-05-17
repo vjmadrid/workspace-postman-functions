@@ -129,6 +129,7 @@ globals = {
 
     /**
      * Checking a list of parameters in the path of request
+     * Example: http://www.mysite.com?param=value&param=value
      */
     checkRequestPathParams: function(param_list) {
         this.isParameterUndefined(param_list, 'param_list')
@@ -137,6 +138,23 @@ globals = {
             const value = pm.request.url.query.get(param); 
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the param '" + param + "' explicitly in the url path");
+            }
+        })
+
+        return true
+    },
+
+    /**
+     * Checking a list of path variables in the path of request
+     * Example: http://www.mysite.com/:var
+     */
+    checkRequestPathVars: function(variable_list) {
+        this.isParameterUndefined(variable_list, 'variable_list')
+
+        variable_list.forEach(variable => {
+            const value = pm.request.url.variables.get(variable); 
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, set the variable ':" + variable + "' explicitly in the url path");
             }
         })
 

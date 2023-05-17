@@ -175,12 +175,12 @@ globals = {
         }
 
         const jsonData = pm.request.body.toJSON();
-console.log("JSON: " + JSON.stringify(jsonData))
+console.log("JSON: " + JSON.parse(jsonData));
         key_list.forEach(key => {
             value = jsonData[key];
             console.log("* " + key + ": " + value);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the key ':" + key + "' explicitly in the JSON data in the body request");
+                throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request");
             }
         })
 

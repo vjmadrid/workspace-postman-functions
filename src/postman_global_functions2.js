@@ -183,21 +183,10 @@ globals = {
             throw new Error("Please, define your JSON data in the body request. Remember specify a 'raw' body and JSON format");            
         }
 
-console.log("JSON: " + jsonData);
-console.log("typeof: " + typeof(jsonData));
-console.log("jsonData: " + JSON.stringify(jsonData));
-for (var key in jsonData) {
-    console.log(">>>" + key);
-}
-console.log("raw: " + JSON.stringify(jsonData.raw));
-for (var key in jsonData.raw) {
-    console.log("---" + key);
-}
         ourBody = JSON.parse(jsonData.raw);
 
         key_list.forEach(key => {
             value = ourBody[key];
-            console.log("* " + key + ": " + value);
             if(typeof(value) === "undefined"){
                 throw new Error("Please, set the key '" + key + "' explicitly in the JSON data in the body request");
             }

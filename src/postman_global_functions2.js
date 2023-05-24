@@ -63,6 +63,23 @@ globals = {
     },
 
     /**
+     * Data variables operations 
+     * Data variables are defined in data files in JSON or CSV format (collection runner)
+     */
+    checkDataVarsSet: function(datavar_list){
+        this.isParameterUndefined(datavar_list, 'datavar_list')
+
+        datavar_list.forEach(datavar => {
+            const value = pm.iterationData.get(datavar);
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, go to 'Runner (Postman foot)' and load the data file containing the variable '" + variable + "'");
+            }
+        })
+
+        return true
+    },
+
+    /**
      * Checking the list of headers for a request
      * 
      * VERY IMPORTANT:
@@ -113,7 +130,7 @@ globals = {
         // Iterate one by one. Assign the name of each header with its key (name=key)
         headers.each((header) => 
         {
-            console.log("key: " + header.key + ", value: " + header.value + ", name: " + header.name);
+            //console.log("key: " + header.key + ", value: " + header.value + ", name: " + header.name);
             header.name = header.key; // By default, name is empty
         });
 
@@ -165,7 +182,7 @@ globals = {
     },
 
     /**
-     * Checking a list of keys in the Body (Json format)
+     * Checking a list of keys in the Request Body (Json format)
      * IMPORTANT: 
      *    - Internally, postman adds the keys 'mode' and 'raw'. Our JSON is children of 'raw'
      *    - 'raw' key stores our JSON body as string. You must parse it to JSON Object
@@ -196,7 +213,7 @@ globals = {
     },
 
     /**
-     * Checking a list of keys in the Body (Json format)
+     * Checking a list of keys in the Response Body (Json format)
      */
     checkResponseJson: function(key_list) {
         this.isParameterUndefined(key_list, 'key_list')
@@ -211,5 +228,21 @@ globals = {
 
         return true
     },
+
+    /**
+     * Checking a list of cookies
+     */
+    checkCookies: function(cookie_list) {
+        this.isParameterUndefined(cookie_list, 'cookie_list');
+
+        cookie_list.forEach(cookie => {
+            const value = pm.cookies.get(cookie);
+            if(typeof(value) === "undefined"){
+                throw new Error("Please, set the cookie ':" + variable + "'.");
+            }
+        })
+
+        return true
+    }
 
 }

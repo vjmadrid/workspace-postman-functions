@@ -72,7 +72,7 @@ globals = {
         datavar_list.forEach(datavar => {
             const value = pm.iterationData.get(datavar);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, go to 'Runner (Postman foot)' and load the data file containing the variable '" + variable + "'");
+                throw new Error("Please, go to 'Runner (Postman foot (right))' and load the data file containing the data variable '" + datavar + "'");
             }
         })
 
@@ -238,7 +238,7 @@ globals = {
         cookie_list.forEach(cookie => {
             const value = pm.cookies.get(cookie);
             if(typeof(value) === "undefined"){
-                throw new Error("Please, set the cookie ':" + variable + "'.");
+                throw new Error("Please, set the cookie ':" + cookie + "'.");
             }
         })
 

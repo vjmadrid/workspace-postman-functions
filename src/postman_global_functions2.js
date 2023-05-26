@@ -252,6 +252,23 @@ globals = {
         return true;
     },
 
+    /**
+     * Checking a list of keys in the Response Body (XML format)
+     */
+    checkResponseXML: function(key_list) {
+        this.isParameterUndefined(key_list, 'key_list');
+        const jsonData = xml2json(pm.response.text());
+
+        key_list.forEach(key => {
+            value = jsonData[key];
+            if(typeof(value) === "undefined") {
+                throw new Error("The key '" + key + "' is not present in the XML data in the response");
+            }
+        });
+
+        return true;
+    },
+
 
     /**
      * Checking a list of cookies

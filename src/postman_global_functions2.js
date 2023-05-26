@@ -96,6 +96,27 @@ globals = {
 
 
     /**
+     * Local variables operations 
+     * - Note: Local variables are defined and used with newman or Collection runner
+     */
+
+    // Given a list of variables (variable names in a string array), check if all of them are defined as local variables
+    checkLocalVarsSet: function(localvar_list){
+        this.isParameterUndefined(localvar_list, 'localvar_list');
+
+        localvar_list.forEach(localvar => {
+            const value = pm.variables.get(localvar);
+
+            if(typeof(value) === "undefined") {
+                throw new Error("The local variable '" + localvar + "' is not defined");
+            }
+        });
+
+        return true;
+    },
+
+
+    /**
      * Checking the list of headers for a request
      * 
      * VERY IMPORTANT:

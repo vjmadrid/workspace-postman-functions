@@ -261,8 +261,27 @@ globals = {
 
         cookie_list.forEach(cookie => {
             const value = pm.cookies.get(cookie);
+
             if(typeof(value) === "undefined") {
-                throw new Error("Please, set the cookie ':" + cookie + "'.");
+                throw new Error("Please, set the cookie '" + cookie + "'.");
+            }
+        });
+
+        return true;
+    },
+
+
+    /**
+     * Check a list of string inside the response
+     */
+    checkResponseStrings: function(stringList) {
+        this.isParameterUndefined(stringList, 'stringList');
+
+        responseString = pm.response.text();
+
+        stringList.forEach(stringPart => {
+            if(!responseString.includes(stringPart)) {
+                throw new Error("The string part '" + stringPart + "' is not included in the response.");
             }
         });
 

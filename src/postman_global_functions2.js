@@ -93,7 +93,8 @@ globals = {
         this.isParameterUndefined(parameter_name, 'parameter_name')
 
         if (this.isDebug()){
-            console.log("getParam " + parameter_name + "with value ["+ parameter_name.value +"]")
+            const value = req.url.query.find(el => el.key === parameter_name)
+            console.log("getParam " + parameter_name + " with value [" + value +"]")
         }
 
         const req = pm.request;

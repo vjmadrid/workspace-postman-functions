@@ -120,7 +120,7 @@ globals = {
 
         if (this.isDebug()){
             console.log("isParameterEnabled ...")
-        }
+        };
 
         const elem = this.getParam(parameter_name);
         return elem? !elem.disabled: false;
@@ -131,7 +131,7 @@ globals = {
 
         if (this.isDebug()){
             console.log("requiredParameters ...")
-        }
+        };
 
         const req = pm.request.toJSON();
         variable_list.forEach(param =>{

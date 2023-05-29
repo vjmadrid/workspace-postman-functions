@@ -1,13 +1,21 @@
 globals = {
 
+    /**
+     * Manage operations
+     */
+
     isActive: function(){
-        
         return true
     },
 
+
+    /**
+     * General operations
+     */
+
     isParameterUndefined: function(parameter, parameter_name){
         if(typeof(parameter) === "undefined") {
-            throw new Error(parameter_name + " is undefined")
+            throw new Error(parameter_name + " parameter is undefined")
         }
 
         return true;
@@ -15,7 +23,7 @@ globals = {
 
 
     /**
-     * Global variables operations 
+     * Global variables operations
      */
 
     // Given a list of variables (variable names in a string array), check if all of them are defined as global variables
@@ -35,7 +43,7 @@ globals = {
 
 
     /**
-     * Environment variables operations 
+     * Environment variables operations
      */
 
     // Given a list of variables (variable names in a string array), check if all of them are defined as environment variables
@@ -55,7 +63,7 @@ globals = {
 
 
     /**
-     * Collection variables operations 
+     * Collection variables operations
      */
 
     // Given a list of variables (variable names in a string array), check if all of them are defined as collection variables
@@ -73,9 +81,49 @@ globals = {
         return true;
     },
 
+    /**
+     * Parameter
+     */
+
+    getParam: function(parameter_name){
+        this.isParameterUndefined(parameter_name, 'parameter_name')
+
+        const req = pm.request;
+        try{
+            if(req.method === "GET"){
+                return req.url.query.find(el => el.key === parameter_name);
+            }else if(req.method === "POST"){
+                if(!req.body.urlencoded){
+                    throw new Error("This is POST request but not sending paramenters in the 'body'")
+                }
+                return req.body.urlencoded.find(el => el.key === parameter_name)
+            }
+        }catch(exception) {
+            throw new Error("Error in 'getParam(): ${exception}")
+        }
+    },
+
+    isParameterEnabled: function(parameter_name){
+        this.isParameterUndefined(parameter_name, 'parameter_name')
+
+        const elem = this.getParam(parameter_name);
+        return elem? !elem.disabled: false;
+    },
+
+    requiredParameters: function(variable_list){
+        this.isParameterUndefined(variable_list, 'variable_list');
+
+        const req = pm.request.toJSON();
+        variable_list.forEach(param =>{
+            if(!this.isEnabled(param)){
+                throw new Error("Please enable all required parameter(s): ${requiredParams.join(', ')}");
+            }
+        });
+    },
+
 
     /**
-     * Data variables operations 
+     * Data variables operations
      * - Note: Data variables are defined in data files in JSON or CSV format (collection runner)
      */
 
@@ -96,7 +144,7 @@ globals = {
 
 
     /**
-     * Local variables operations 
+     * Local variables operations
      * - Note: Local variables are defined and used with newman or Collection runner
      */
 
@@ -118,7 +166,7 @@ globals = {
 
     /**
      * Checking the list of headers for a request
-     * 
+     *
      * VERY IMPORTANT:
      *   Default Postman headers are not seen in pre-request script. Headers must be defined explicitly
      *   By default, the header name is empty. We must to assign the name with the key if we want to access it
@@ -130,9 +178,9 @@ globals = {
         //Print HeaderList
         //console.log(headers)
         //console.log("Count of headers in request: "+headers.count())
-        
+
         // Iterate one by one. Assign the name of each header with its key (name=key)
-        headers.each((header) => 
+        headers.each((header) =>
         {
             //console.log("key: " + header.key + ", value: " + header.value + ", name: " + header.name);
             header.name = header.key; // By default, name is empty
@@ -226,7 +274,7 @@ globals = {
 
     /**
      * Checking a list of keys in the Request Body (Json format)
-     * IMPORTANT: 
+     * IMPORTANT:
      *    - Internally, postman adds the keys 'mode' and 'raw'. Our JSON is children of 'raw' key
      *    - 'raw' key stores our JSON body as string. You must parse it to JSON Object
      */

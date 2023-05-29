@@ -95,6 +95,7 @@ globals = {
         const req = pm.request;
 
         if (this.isDebug()){
+            console.log("URL :: " + req.url)
             const value = req.url.query.find(el => el.key === parameter_name)
             console.log("getParam " + parameter_name + " with value [" + value +"]")
         }

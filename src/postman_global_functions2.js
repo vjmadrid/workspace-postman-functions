@@ -115,8 +115,8 @@ globals = {
 
         const req = pm.request.toJSON();
         variable_list.forEach(param =>{
-            if(!this.isEnabled(param)){
-                throw new Error("Please enable all required parameter(s): ${requiredParams.join(', ')}");
+            if(!this.isParameterEnabled(param)){
+                throw new Error("Please enable all required parameter(s): ${variable_list.join(', ')}");
             }
         });
     },

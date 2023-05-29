@@ -4,6 +4,10 @@ globals = {
      * Manage operations
      */
 
+    isDebug: function(){
+        return true
+    },
+
     isActive: function(){
         return true
     },
@@ -88,6 +92,10 @@ globals = {
     getParam: function(parameter_name){
         this.isParameterUndefined(parameter_name, 'parameter_name')
 
+        if (this.isDebug()){
+            console.log("getParam with :" + parameter_name)
+        }
+
         const req = pm.request;
         try{
             if(req.method === "GET"){
@@ -116,7 +124,7 @@ globals = {
         const req = pm.request.toJSON();
         variable_list.forEach(param =>{
             if(!this.isParameterEnabled(param)){
-                throw new Error('Please enable all required parameter ${variable_list.join(', ')}');
+                throw new Error("Please enable all required parameter ${variable_list.join(', ')}");
             }
         });
     },

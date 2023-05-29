@@ -93,7 +93,7 @@ globals = {
         this.isParameterUndefined(parameter_name, 'parameter_name')
 
         if (this.isDebug()){
-            console.log("getParam with :" + parameter_name)
+            console.log("getParam " + parameter_name + "with value ["+ parameter_name.value +"]")
         }
 
         const req = pm.request;

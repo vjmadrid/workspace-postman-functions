@@ -95,8 +95,8 @@ globals = {
         const req = pm.request;
 
         if (this.isDebug()){
-            console.log("getParam for '" + parameter_name + "' parameter)
-        }
+            console.log("getParam for '" + parameter_name + "' parameter");
+        };
 
         try{
             if(req.method === "GET"){

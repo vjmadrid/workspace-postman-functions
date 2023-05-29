@@ -95,8 +95,7 @@ globals = {
         const req = pm.request;
 
         if (this.isDebug()){
-            const value = req.url.query.find(el => el.key === parameter_name)
-            console.log("getParam " + parameter_name + " with value [" + value +"]")
+            console.log("getParam for '" + parameter_name + "' parameter)
         }
 
         try{
@@ -119,6 +118,10 @@ globals = {
     isParameterEnabled: function(parameter_name){
         this.isParameterUndefined(parameter_name, 'parameter_name')
 
+        if (this.isDebug()){
+            console.log("isParameterEnabled ...")
+        }
+
         const elem = this.getParam(parameter_name);
         return elem? !elem.disabled: false;
     },
@@ -126,7 +129,11 @@ globals = {
     requiredParameters: function(variable_list){
         this.isParameterUndefined(variable_list, 'variable_list');
 
-        const req = pm.request.toJSON();
+        if (this.isDebug()){
+            console.log("requiredParameters ...")
+        }
+
+        //const req = pm.request.toJSON();
         variable_list.forEach(param =>{
             if(!this.isParameterEnabled(param)){
                 throw new Error("Please enable all required parameter ${variable_list.join(', ')}");
@@ -252,7 +259,7 @@ globals = {
         this.isParameterUndefined(param_list, 'param_list');
 
         param_list.forEach(param => {
-            const value = pm.request.url.query.get(param); 
+            const value = pm.request.url.query.get(param);
 
             if(typeof(value) === "undefined") {
                 throw new Error("Please, set the param '" + param + "' explicitly in the url path");

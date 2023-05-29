@@ -95,18 +95,20 @@ globals = {
         const req = pm.request;
 
         if (this.isDebug()){
-            console.log("URL :: " + req.url)
             const value = req.url.query.find(el => el.key === parameter_name)
             console.log("getParam " + parameter_name + " with value [" + value +"]")
         }
 
         try{
             if(req.method === "GET"){
+                console.log("GET mode")
                 return req.url.query.find(el => el.key === parameter_name);
             }else if(req.method === "POST"){
+                console.log("POST mode")
                 if(!req.body.urlencoded){
                     throw new Error("This is POST request but not sending paramenters in the 'body'")
                 }
+                console.log("OTHER mode")
                 return req.body.urlencoded.find(el => el.key === parameter_name)
             }
         }catch(exception) {
